@@ -1,0 +1,15 @@
+# /v1/me/credit-cards
+get:
+  tags:
+    - CreditCard
+  summary: 自身のクレジットカード一覧取得
+  operationId: getCreditCards
+  security:
+    - BearerAuth: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/credit_card.yaml#/components/schemas/response_credit_cards

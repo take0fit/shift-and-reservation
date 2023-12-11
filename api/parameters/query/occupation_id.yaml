@@ -1,0 +1,6 @@
+name: occupationId
+in: query
+description: 職種ID
+schema:
+  type: integer
+required: false

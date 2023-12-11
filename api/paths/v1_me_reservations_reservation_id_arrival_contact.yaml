@@ -1,0 +1,19 @@
+# /v1/me/reservations/{reservationId}/arrival-contact
+put:
+  tags:
+    - Reservation
+  summary: 到着連絡
+  operationId: contactArrival
+  security:
+    - BearerAuth: []
+  parameters:
+    - $ref: ../parameters/path/reservation_id.yaml
+  responses:
+    '200':
+      description: OK
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/common.yaml#/components/schemas/response_error

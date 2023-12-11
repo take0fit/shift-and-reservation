@@ -1,0 +1,6 @@
+name: areaId
+in: query
+description: エリアID
+schema:
+  type: integer
+required: false

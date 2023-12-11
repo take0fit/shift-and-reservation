@@ -1,0 +1,254 @@
+openapi: 3.0
+info:
+  title: reservation.yaml
+  version: '1.0'
+  description: 予約情報
+components:
+  schemas:
+    response_reservation:
+        $ref: '#/components/schemas/reservation'
+    
+    response_reservations:
+      type: object
+      properties:
+        reservations:
+          type: array
+          items:
+            $ref: '#/components/schemas/reservation_summary'
+        meta: 
+          $ref: ./pagination.yaml#/components/schemas/meta
+      required:
+        - reservations
+        - meta
+
+    reservation:
+      type: object
+      properties:
+        reservationId:
+          type: integer
+          description: 予約ID
+          example: 1
+        startTime:
+          type: string
+          description: 予約開始日時
+          example: 2020-01-01 00:00:00
+        endTime:
+          type: string
+          description: 予約終了日時
+          example: 2020-01-01 00:00:00
+        menus:
+          type: array
+          items:
+            $ref: '#/components/schemas/reservation_menu'
+        user:
+          $ref: '#/components/schemas/reservation_user'
+        workingSalon:
+          $ref: '#/components/schemas/reservation_working_salon'
+        occupation:
+          $ref: '#/components/schemas/reservation_occupation'
+      required:
+        - reservationId
+        - startTime
+        - endTime
+        - menus
+        - user
+        - workingSalon
+        - occupation
+    
+    reservation_summary:
+      type: object
+      properties:
+        reservationId:
+          type: integer
+          description: 予約ID
+          example: 1
+        startTime:
+          type: string
+          description: 予約開始日時
+          example: 2020-01-01 00:00:00
+        endTime:
+          type: string
+          description: 予約終了日時
+          example: 2020-01-01 00:00:00
+        isMultipleMenu:
+          type: boolean
+          description: 複数メニューかフラグ
+          example: true
+        totalPrice:
+          type: integer
+          description: 合計金額
+          example: 10000
+        totalTreatmentTime:
+          type: integer
+          description: 合計施術所要時間(分単位)
+          example: 60
+        user:
+          $ref: '#/components/schemas/reservation_user_summary'
+        menu:
+          $ref: '#/components/schemas/reservation_menu_summary'
+        workingSalon:
+          $ref: '#/components/schemas/reservation_working_salon_summary'
+        isPayable:
+          type: boolean
+          description: 支払い可能かフラグ
+          example: true
+      required:
+        - reservationId
+        - startTime
+        - endTime
+        - isMultipleMenu
+        - totalPrice
+        - totalTreatmentTime
+        - user
+        - menu
+        - workingSalon
+        - isPayable
+    
+    reservation_working_salon:
+      allOf:
+        - $ref: '#/components/schemas/reservation_working_salon_summary'
+        - properties:
+            prefectureId:
+              type: integer
+              description: 都道府県ID
+              example: 13
+            city:
+              type: string
+              description: 市町村
+              example: 武蔵野市
+            address:
+              type: string
+              description: 以降の住所
+              example: 吉祥寺本町1-12-13センチュリーホーム吉祥寺ビル2F
+            nearestStation:
+              type: string
+              description: 最寄駅
+              example: 中央線・吉祥寺駅 3分
+            latitude:
+              type: double
+              description: 緯度
+              example: 35.7023137
+            longitude:
+              type: double
+              description: 緯度
+              example: 139.5803228
+          required:
+            - prefectureId
+            - city
+            - address
+            - nearestStation
+            - latitude
+            - longitude
+        
+
+    reservation_working_salon_summary:
+      type: object
+      properties:
+        workingSalonId:
+          type: integer
+          description: 働いているサロンID
+          example: 1
+        workingSalonName:
+          type: string
+          description: 働いているサロン名
+          example: JAM 吉祥寺店
+      required:
+        - workingSalonId
+        - workingSalonName
+
+    reservation_user:
+      allOf:
+        - $ref: '#/components/schemas/reservation_user_summary'
+        - properties:
+            cautions:
+              type: string
+              description: 注意事項
+              example: 注意事項です。
+          required:
+            - cautions
+
+    reservation_user_summary:
+      type: object
+      properties:
+        userId:
+          type: integer
+          description: ビューティシャンID
+          example: 1
+        nickname:
+          type: string
+          description: ニックネーム
+          example: ニック
+        profileImageUrl:
+          type: string
+          nullable: true
+          description: プロフィール画像URL
+          example: https://example.com/image.png
+      required:
+        - userId
+        - nickname
+        - profileImageUrl
+
+    reservation_menu:
+      type: object
+      properties:
+        menuId:
+          type: integer
+          description: メニューID
+          example: 1
+        menuName:
+          type: string
+          description: メニュー名
+          example: カット
+        menuCategoryName:
+          type: string
+          description: メニューカテゴリ名
+          example: カット
+        explanation:
+          type: string
+          description: メニュー説明
+          example: カットの説明です
+        menuPrice:
+          type: integer
+          description: 料金
+          example: 3000
+        treatmentTime:
+          type: integer
+          description: 施術時間(分単位)
+          example: 30
+        tags:
+          type: array
+          description: タグリスト
+          items:
+            type: string
+      required:
+        - menuId
+        - menuName
+        - menuCategoryName
+        - explanation
+        - menuPrice
+        - treatmentTime
+        - tags
+
+    reservation_menu_summary:
+      type: object
+      properties:
+        menuName:
+          type: string
+          description: メニュー名
+          example: カット
+
+    reservation_occupation:
+      type: object
+      properties:
+        occupationId:
+          type: integer
+          description: 職種ID
+          example: 1
+        occupationName:
+          type: string
+          description: 職種名
+          example: 美容師
+        years:
+          type: integer
+          description: 職歴年数（年単位）
+          example: 5

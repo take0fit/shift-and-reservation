@@ -1,0 +1,6 @@
+name: prefectureId
+in: query
+description: 都道府県ID
+schema:
+  type: integer
+required: false

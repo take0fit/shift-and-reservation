@@ -1,0 +1,6 @@
+in: path
+name: chartId 
+description: カルテID
+schema:
+  type: integer
+required: true

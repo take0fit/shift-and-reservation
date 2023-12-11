@@ -1,0 +1,15 @@
+# /v1/users/{userId}
+get:
+  tags:
+    - User
+  summary: ユーザー詳細取得
+  operationId: getUser
+  parameters:
+    - $ref: ../parameters/path/user_id.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/user.yaml#/components/schemas/response_user

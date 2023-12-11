@@ -1,0 +1,6 @@
+in: path
+name: notificationId
+description: 通知ID
+schema:
+  type: integer
+required: true

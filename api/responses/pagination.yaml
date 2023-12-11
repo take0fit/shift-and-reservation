@@ -1,0 +1,31 @@
+openapi: 3.0
+info:
+  title: pagination.yaml
+  version: '1.0'
+  description: ページネーション情報
+components:
+  schemas:
+    meta:
+      type: object
+      properties:
+        perPage:
+          type: integer
+          description: 1ページごとのデータ件数
+          example: 20
+        currentPage:
+          type: integer
+          description: 現在のページ番号
+          example: 1
+        lastPage:
+          type: integer
+          description: 最後のページ番号
+          example: 1
+        total:
+          type: integer
+          description: データ総数
+          example: 15
+      required:
+        - perPage
+        - currentPage
+        - lastPage
+        - total

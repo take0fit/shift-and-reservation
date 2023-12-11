@@ -1,0 +1,6 @@
+in: query
+name: beauticianId 
+description: ビューティシャンID
+schema:
+  type: integer
+required: false

@@ -1,0 +1,27 @@
+openapi: 3.0
+info:
+  title: reservation.yaml
+  version: '1.0'
+  description: 予約情報
+components:
+  schemas:
+    request_reservation_payment:
+      type: object
+      description: 予約した施術の決済
+      properties:
+        payjpCardId:
+          type: string
+          description: PAYJPのカードID（使用しない場合は空文字で）
+          example: car_c26a737b823ce80377f5d4747fbc
+        paymentAmount:
+          type: integer
+          description: 支払う合計金額
+          example: 1000
+        usePoint:
+          type: integer
+          description: 決済で利用するポイント
+          example: 1000
+      required:
+        - payjpCardId
+        - paymentAmount
+        - usePoint

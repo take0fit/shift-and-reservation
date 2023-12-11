@@ -1,0 +1,6 @@
+name: page
+in: query
+description: ページ番号
+schema:
+  type: integer
+required: false

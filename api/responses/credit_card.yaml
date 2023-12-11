@@ -1,0 +1,58 @@
+openapi: 3.0
+info:
+  title: credit_card.yaml
+  version: '1.0'
+  description: クレジットカードデータ
+components:
+  schemas:
+    response_credit_cards:
+      type: object
+      description: クレジットカード情報一覧
+      properties:
+        creditCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/credit_card'
+      required:
+        - creditCards 
+
+    credit_card:
+      type: object
+      description: クレジットカード情報
+      properties:
+        creditCardId:
+          type: string
+          description: クレジットカードID
+          example: car_6845da1a8651f889bc432362dfcb
+        brand:
+          type: string
+          description: ブランド名
+          example: Visa
+        cardNumberLast4:
+          type: string
+          description: カード番号末尾4桁
+          example: 4242
+        expYear:
+          type: integer
+          description: カード有効期限（年）
+          example: 2024
+        expMonth:
+          type: integer
+          description: カード有効期限（月）
+          example: 2
+        name:
+          type: string
+          description: カード名義人
+          example: TARO YAMADA
+        isDefaultCard:
+          type: boolean
+          description: デフォルトカードフラグ
+          example: true
+      required:
+        - creditCardId
+        - brand
+        - cardNumberLast4
+        - expYear
+        - expMonth
+        - name
+        - isDefaultCard

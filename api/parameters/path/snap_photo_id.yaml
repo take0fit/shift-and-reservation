@@ -1,0 +1,6 @@
+in: path
+name: snapPhotoId
+description: snapPhotoId
+schema:
+  type: integer
+required: true

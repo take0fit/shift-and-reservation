@@ -1,0 +1,6 @@
+name: maxPrice
+in: query
+description: 価格上限値
+schema:
+  type: integer
+required: false

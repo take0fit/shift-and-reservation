@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: LISPO CUSTOMER API
+  version: 1.0.0
+servers:
+  - url: http://localhost
+paths:
+
+  /v1/login:
+    $ref: ./paths/v1_login.yaml
+  /v1/me:
+    $ref: ./paths/v1_me.yaml
+
+  /v1/users:
+    $ref: ./paths/v1_users.yaml
+  /v1/users/{userId}:
+    $ref: ./paths/v1_users_userid.yaml
+  /v1/users/{userId}/shifts/one-week:
+    $ref: ./paths/v1_users_userid_shifts_oneweek.yaml
+  /v1/users/{userId}/shifts/one-month:
+    $ref: ./paths/v1_users_userid_shifts_onemonth.yaml
+
+  /v1/me/reservations:
+    $ref: ./paths/v1_me_reservations.yaml
+  /v1/me/reservations/{reservationId}/arrival-contact:
+    $ref: ./paths/v1_me_reservations_reservation_id_arrival_contact.yaml
+  /v1/me/reservations/{reservationId}/payment:
+    $ref: ./paths/v1_me_reservations_reservation_id_payment.yaml
+  /v1/me/reservations/{reservationId}:
+    $ref: ./paths/v1_me_reservations_reservation_id.yaml
+  /v1/me/reservations/{reservationId}/cancel:
+    $ref: ./paths/v1_me_reservations_reservation_id_cancel.yaml
+
+  /v1/me/receipt/download/{chartId}:
+    $ref: ./paths/v1_me_receipt_download_chart_id.yaml
+    
+  /v1/credit-cards:
+    $ref: ./paths/v1_credit_cards.yaml
+  /v1/me/credit-cards:
+    $ref: ./paths/v1_me_credit_cards.yaml
+  /v1/me/credit-cards/{creditCardId}:
+    $ref: ./paths/v1_me_credit_cards_creditcardid.yaml
+
+  /v1/health-check:
+    $ref: ./paths/v1_health_check.yaml
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,18 @@
+# /v1/users
+get:
+  tags:
+    - User
+  summary: ユーザー一覧取得
+  operationId: getUsers
+  security:
+    - BearerAuth: [ ]
+  parameters:
+    - $ref: ../parameters/query/per_page.yaml
+    - $ref: ../parameters/query/page.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/user.yaml#/components/schemas/response_users

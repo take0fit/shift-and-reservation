@@ -1,0 +1,6 @@
+in: path
+name: creditCardId 
+description: クレジットカードID
+schema:
+  type: string
+required: true

@@ -1,0 +1,6 @@
+name: stationName
+in: query
+description: 駅名
+schema:
+  type: string
+required: false

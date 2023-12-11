@@ -1,0 +1,8 @@
+name: occupationTagIds
+in: query
+description: 職種タグIDリスト
+schema:
+  type: array
+  items:
+    type: integer
+required: false

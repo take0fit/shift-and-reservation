@@ -1,0 +1,6 @@
+in: path
+name: userId
+description: userId
+schema:
+  type: string
+required: true

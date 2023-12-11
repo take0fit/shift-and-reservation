@@ -1,0 +1,6 @@
+name: sex
+in: query
+description: 性別（0:男,1:女,2:その他）
+schema:
+  type: integer
+required: false

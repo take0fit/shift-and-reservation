@@ -1,0 +1,16 @@
+openapi: 3.0
+info:
+  title: credit_card.yaml
+  version: '1.0'
+  description: クレジットカード情報
+components:
+  schemas:
+    request_add_credit_card:
+      type: object
+      properties:
+        creditCardToken:
+          type: string
+          description: クレジットカードトークン
+          example: tok_76e202b409f3da51a0706605ac81
+      required:
+        - creditCardToken

@@ -1,0 +1,16 @@
+# /v1/users/{userId}/shifts/one-month
+get:
+  tags:
+    - Shift
+  summary: 1ヶ月単位のシフト情報取得
+  operationId: GetShiftsForMonth
+  parameters:
+    - $ref: ../parameters/query/year.yaml
+    - $ref: ../parameters/query/month.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/shift.yaml#/components/schemas/response_shifts_for_month

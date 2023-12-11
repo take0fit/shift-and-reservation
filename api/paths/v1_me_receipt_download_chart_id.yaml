@@ -1,0 +1,18 @@
+# /v1/me/receipt/download/{chartId}
+get:
+  tags:
+    - Receipt
+  summary: 領収書ダウンロード
+  operationId: downloadReceipt
+  security:
+    - BearerAuth: []
+  parameters:
+    - $ref: ../parameters/path/chart_id.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/pdf:
+          schema:
+            type: string
+            format: binary

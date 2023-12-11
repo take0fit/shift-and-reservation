@@ -1,0 +1,6 @@
+name: sort
+in: query
+schema:
+  type: integer
+description: レビューの表示順（1:おすすめ、2:新着、3:口コミ）
+required: false

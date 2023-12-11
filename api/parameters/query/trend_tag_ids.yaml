@@ -1,0 +1,8 @@
+name: trendTagIds
+in: query
+description: トレンドタグIDリスト
+schema:
+  type: array
+  items:
+    type: integer
+required: false

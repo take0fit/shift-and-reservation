@@ -1,0 +1,15 @@
+# /v1/users/{userId}/shifts/one-week
+get:
+  tags:
+    - Shift
+  summary: 一週間分のシフト取得API
+  operationId: getOneWeekShift
+  parameters:
+    - $ref: ../parameters/query/date.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/shift.yaml#/components/schemas/response_one_week_shifts

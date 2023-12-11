@@ -1,0 +1,24 @@
+# /v1/me/reservations/{reservationId}/payment
+post:
+  tags:
+    - Reservation
+  summary: 予約決済
+  operationId: paymentReservation
+  security:
+    - BearerAuth: []
+  parameters:
+    - $ref: ../parameters/path/reservation_id.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../requests/reservation.yaml#/components/schemas/request_reservation_payment
+  responses:
+    '200':
+      description: OK
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/common.yaml#/components/schemas/response_error

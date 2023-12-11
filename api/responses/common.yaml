@@ -1,0 +1,19 @@
+openapi: 3.0
+info:
+  title: common.yaml
+  version: '1.0'
+  description: 共通レスポンス
+components:
+  schemas:
+    response_error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: ユーザへのエラーメッセージ
+        devMessage:
+          type: string
+          example: 開発用エラーメッセージ
+      required:
+        - message
+        - devMessage

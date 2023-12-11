@@ -1,0 +1,18 @@
+# /v1/me/reservations
+get:
+  tags:
+    - Reservation
+  summary: 自身の予約一覧取得
+  operationId: getReservations
+  security:
+    - BearerAuth: []
+  parameters:
+    - $ref: ../parameters/query/per_page.yaml
+    - $ref: ../parameters/query/page.yaml
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/reservation.yaml#/components/schemas/response_reservations

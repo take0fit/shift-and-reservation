@@ -1,0 +1,14 @@
+openapi: 3.0
+info:
+  title: auth.yaml
+  version: '1.0'
+  description: 認証情報
+components:
+  schemas:
+    response_login:
+      type: object
+      properties:
+        accessToken:
+          type: string
+      required:
+        - accessToken

@@ -1,0 +1,6 @@
+in: path
+name: customerInquiryChatId 
+description: 会員用問い合わせチャットID
+schema:
+  type: integer
+required: true

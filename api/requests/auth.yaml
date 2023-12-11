@@ -1,0 +1,15 @@
+openapi: 3.0
+info:
+  title: auth.yaml
+  version: '1.0'
+  description: 認証情報
+components:
+  schemas:
+    request_login:
+      type: object
+      properties:
+        firebaseToken:
+          type: string
+          description: Firebaseトークン
+      required:
+        - firebaseToken

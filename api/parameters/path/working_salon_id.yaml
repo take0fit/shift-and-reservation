@@ -1,0 +1,6 @@
+in: path
+name: workingSalonId
+description: 働いているサロンID
+schema:
+  type: integer
+required: true

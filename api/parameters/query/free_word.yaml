@@ -1,0 +1,6 @@
+name: freeWord
+in: query
+description: フリーワード
+schema:
+  type: string
+required: false

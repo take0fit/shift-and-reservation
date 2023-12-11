@@ -1,0 +1,6 @@
+name: sort
+in: query
+schema:
+  type: integer
+description: レビューの表示順（1:新着順、2:評価順）指定なしの場合は1:新着順
+required: false

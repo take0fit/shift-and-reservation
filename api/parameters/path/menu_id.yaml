@@ -1,0 +1,6 @@
+in: path
+name: menuId
+description: menuId
+schema:
+  type: integer
+required: true

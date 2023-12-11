@@ -1,0 +1,6 @@
+in: path
+name: reservationId
+description: 予約ID
+schema:
+  type: integer
+required: true

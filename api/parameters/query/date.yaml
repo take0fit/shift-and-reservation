@@ -1,0 +1,6 @@
+in: query
+name: date
+description: 日付
+schema:
+  type: string
+required: true

@@ -1,0 +1,127 @@
+openapi: 3.0
+info:
+  title: shift.yaml
+  version: '1.0'
+  description: シフト
+components:
+  schemas:
+    response_one_week_shifts:
+      type: object
+      description: 一週間分のシフト一覧
+      properties:
+        oneWeekShifts:
+          type: array
+          items:
+            $ref: '#/components/schemas/oneWeekShift'
+        openingTime:
+          type: string
+          description: 最早予約可能時間
+          example: 08:00
+        closingTime:
+          type: string
+          description: 最遅予約可能時間
+          example: 24:00
+      required:
+        - oneWeekShift
+        - openingTime
+        - closingTime
+
+    response_shifts_for_month:
+      type: object
+      description: 1ヶ月のシフト情報
+      properties:
+        shifts:
+          type: array
+          items:
+            $ref: '#/components/schemas/shift_per_month'
+      required:
+        - shifts
+
+    oneWeekShift:
+      type: object
+      description: 一週間分のシフト
+      properties:
+        date:
+          type: string
+          description: 日付
+          example: 2023-01-01
+        nonReservableHours:
+          type: array
+          items:
+            $ref: '#/components/schemas/time'
+      required:
+        - date
+        - workingSalon
+        - nonReservableHours
+
+    shift_per_month:
+      type: object
+      description: 一月の日毎のシフト情報
+      properties:
+        date:
+          type: string
+          description: 日付
+          example: 2023-01-01
+        areaName:
+          type: string
+          description: エリア名
+          example: 渋谷
+        availableHours:
+          type: array
+          items:
+            type: string
+            example: 10:00~12:00
+      required:
+        - date
+        - areaName
+        - availableHours
+
+    shift_working_place:
+      type: object
+      nullable: true
+      properties:
+        workingPlaceId:
+          type: integer
+          description: 働いている場所ID
+          example: 1
+        workingPlaceName:
+          type: string
+          description: 働いている場所名
+          example: JAM 吉祥寺店
+        prefectureId:
+          type: integer
+          description: 都道府県ID
+          example: 13
+        city:
+          type: string
+          description: 市町村
+          example: 武蔵野市
+        address:
+          type: string
+          description: 以降の住所
+          example: 吉祥寺本町1-12-13センチュリーホーム吉祥寺ビル2F
+        nearestStation:
+          type: string
+          description: 最寄駅
+          example: 中央線・吉祥寺駅 3分
+        latitude:
+          type: double
+          description: 緯度
+          example: 35.7023137
+        longitude:
+          type: double
+          description: 緯度
+          example: 139.5803228
+
+
+    time:
+      type: object
+      properties:
+        startTime:
+          type: string
+          description: 開始時間
+          example: 10:00
+        endTime:
+          type: string
+          description: 終了時間
+          example: 18:00

@@ -1,0 +1,6 @@
+in: path
+name: beauticianCustomerChatId 
+description: ビューティシャンと会員とのチャットID
+schema:
+  type: integer
+required: true

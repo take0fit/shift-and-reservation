@@ -1,0 +1,30 @@
+# /v1/login
+post:
+  tags:
+    - Auth
+  summary: 会員ログインAPI
+  operationId: login
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../requests/auth.yaml#/components/schemas/request_login
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/auth.yaml#/components/schemas/response_login
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/common.yaml#/components/schemas/response_error 
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/common.yaml#/components/schemas/response_error 

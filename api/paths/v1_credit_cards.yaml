@@ -1,0 +1,23 @@
+# /v1/credit-cards
+post:
+  tags:
+    - CreditCard
+  summary: クレジットカード追加
+  operationId: addCreditCard
+  security:
+    - BearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../requests/credit_card.yaml#/components/schemas/request_add_credit_card
+  responses:
+    '200':
+      description: OK
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/common.yaml#/components/schemas/response_error

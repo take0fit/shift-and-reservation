@@ -1,0 +1,6 @@
+name: reservationDate
+in: query
+description: 予約日
+schema:
+  type: string
+required: false

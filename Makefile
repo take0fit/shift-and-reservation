@@ -1,8 +1,8 @@
-NAME := lispo-customer-api
+NAME := shift-and-reservation
 VERSION := v0.0.1
 
 generate:
-	java -cp ./tools/openapi-generator-cli.jar:./tools/go-custom-server-openapi-generator-1.0.0.jar org.openapitools.codegen.OpenAPIGenerator generate -g go-custom-server -i ./api/openapi.yaml -o ./ --git-user-id=LifeSports --git-repo-id=lispo-customer-api --additional-properties=sourceFolder=. --additional-properties=enumClassPrefix=true
+	java -cp ./tools/openapi-generator-cli.jar:./tools/go-custom-server-openapi-generator-1.0.0.jar org.openapitools.codegen.OpenAPIGenerator generate -g go-custom-server -i ./api/openapi.yaml -o ./ --git-user-id=take0fit --git-repo-id=shift-and-reservation --additional-properties=sourceFolder=. --additional-properties=enumClassPrefix=true
 
 combine-openapi:
 	java -cp ./tools/openapi-generator-cli.jar:./tools/go-custom-server-openapi-generator-1.0.0.jar org.openapitools.codegen.OpenAPIGenerator generate -g openapi -i ./api/openapi.yaml -o ./api/output

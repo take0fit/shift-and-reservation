@@ -1,0 +1,6 @@
+name: minPrice
+in: query
+description: 価格下限値
+schema:
+  type: integer
+required: false

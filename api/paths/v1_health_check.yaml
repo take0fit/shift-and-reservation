@@ -1,0 +1,9 @@
+# /v1/health-check
+get:
+  tags:
+    - HealthCheck
+  summary: ヘルスチェック
+  operationId: getHealthCheck
+  responses:
+    '200':
+      description: OK

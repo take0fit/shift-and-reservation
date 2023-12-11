@@ -1,0 +1,8 @@
+name: commonTagIds
+in: query
+description: 共通タグIDリスト
+schema:
+  type: array
+  items:
+    type: integer
+required: false

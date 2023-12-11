@@ -1,0 +1,60 @@
+# /v1/me
+get:
+  tags:
+    - Me
+  summary: 自身の会員情報取得API 
+  operationId: getMe
+  security:
+    - BearerAuth: []
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/me.yaml#/components/schemas/response_me
+put:
+  tags:
+    - Me
+  summary: 自身の会員情報更新API 
+  operationId: updateMe
+  security:
+    - BearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../requests/me.yaml#/components/schemas/request_update_me
+  responses:
+    '200':
+      description: OK
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/common.yaml#/components/schemas/response_error
+
+delete:
+  tags:
+    - Me
+  summary: 退会
+  operationId: deleteMe
+  security:
+    - BearerAuth: []
+  responses:
+    '200':
+      description: OK
+    '400':
+      description: 予約がある場合に一番近い予約内容を返却します
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/common.yaml#/components/schemas/response_error
+    '500':
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: ../responses/common.yaml#/components/schemas/response_error

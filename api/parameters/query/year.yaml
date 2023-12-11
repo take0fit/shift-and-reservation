@@ -1,0 +1,6 @@
+in: query
+name: year
+description: 年（西暦）
+schema:
+  type: integer
+required: true

@@ -1,0 +1,6 @@
+in: query
+name: month
+description: 月
+schema:
+  type: integer
+required: true

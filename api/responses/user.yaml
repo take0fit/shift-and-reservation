@@ -1,0 +1,831 @@
+openapi: 3.0
+info:
+  title: user.yaml
+  version: '1.0'
+  description: ユーザーデータ
+components:
+  schemas:
+    response_my_users:
+      type: object
+      description: 担当ユーザー一覧
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_summary'
+      required:
+        - users
+
+    response_recommended_users:
+      type: object
+      description: おすすめユーザー一覧
+      properties:
+        occupations:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_summary'
+      required:
+        - occupations
+
+    response_favorite_users:
+      type: object
+      description: お気に入りユーザー一覧
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_summary'
+        meta:
+          $ref: ./pagination.yaml#/components/schemas/meta
+      required:
+        - users
+        - meta
+
+    response_reserved_users:
+      type: object
+      description: 予約済みユーザー一覧
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_summary'
+        meta:
+          $ref: ./pagination.yaml#/components/schemas/meta
+      required:
+        - users
+        - meta
+    
+    response_favorite_introduction_users:
+      type: object
+      description: お気に入りユーザー情報（紹介リンクあり）一覧
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_summary'
+      required:
+        - users
+
+    response_user:
+      type: object
+      description: ユーザー詳細
+      properties:
+        userId:
+          type: integer
+          description: ユーザーID
+          example: 1
+        nickname:
+          type: string
+          description: ニックネーム
+          example: たなやん
+        profileImageUrl:
+          type: string
+          description: プロフィール画像
+          nullable: true
+          example: https://bucket-lispo-dev-public.s3.ap-northeast-1.amazonaws.com/241/profile.png
+        selfIntroduction:
+          type: string
+          description: 自己紹介
+          example: よろしくお願いいたします。
+        sex:
+          type: integer
+          description: 性別（0:男 1:女 2:その他）
+          example: 0
+
+      required:
+        - userId
+        - nickname
+        - profileImageUrl
+        - selfIntroduction
+        - sex
+
+    recommended_users:
+      type: object
+      description: おすすめユーザー一覧
+      properties:
+        occupationId:
+          type: integer
+        occupationName:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_summary'
+      required:
+        - occupationId
+        - occupationName
+        - users
+
+    response_new_users:
+      type: object
+      description: 新しく登録したユーザー一覧
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_summary'
+      required:
+        - users
+
+    response_block_users:
+      type: object
+      description: 新しく登録したユーザー一覧
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_summary_for_block'
+        meta:
+          $ref: ./pagination.yaml#/components/schemas/meta
+      required:
+        - users
+        - meta
+
+    response_users:
+      type: object
+      description: ユーザー一覧
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_index'
+        meta:
+          $ref: ./pagination.yaml#/components/schemas/meta
+      required:
+        - users
+        - meta
+
+    user_summary:
+      type: object
+      description: ユーザー情報
+      properties:
+        userId:
+          type: integer
+        nickname:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/area_for_user'
+        menu:
+          $ref: '#/components/schemas/menu_summary_for_user'
+      required:
+        - userId
+        - nickname
+        - imageUrl
+        - occupation
+        - reviewScore
+        - areas
+        - menu
+
+    user_index:
+      type: object
+      description: ユーザー情報（ユーザー一覧で使用）
+      properties:
+        userId:
+          type: integer
+        nickname:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        occupations:
+          type: array
+          items:
+            $ref: '#/components/schemas/occupation_summary'
+        reviewScore:
+          type: float64
+        areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/area_for_user'
+        menu:
+          $ref: '#/components/schemas/menu_summary_for_user'
+        isFavorite:
+          type: boolean
+        occupationTags:
+          type: array
+          description: 得意な施術リスト
+          items:
+            type: string
+        shortestReservableDate:
+          type: string
+          nullable: true
+        menus:
+          type: array
+          items:
+            $ref: '#/components/schemas/menu_for_user_index'
+      required:
+        - userId
+        - nickname
+        - imageUrl
+        - occupation
+        - reviewScore
+        - areas
+        - menu
+        - isFavorite
+        - occupationTags
+        - shortestReservableDate
+        - menus
+
+    user_summary_for_my_user:
+      type: object
+      description: 担当ユーザー一覧で使用するユーザー情報
+      properties:
+        userId:
+          type: integer
+        nickname:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        occupation:
+          $ref: '#/components/schemas/occupation_summary'
+        occupations:
+          type: array
+          items:
+            $ref: '#/components/schemas/occupation_summary'
+        isFavorite:
+          type: boolean
+          description: 会員がお気に入り登録済みか
+          example: true
+        reviewScore:
+          type: float64
+        goodSkill:
+          type: string
+        areas:
+          type: array
+          items:
+            $ref: '#/components/schemas/area_for_user'
+        shortestReservableDate:
+          type: string
+          nullable: true
+          description: 最短の予約可能日時
+          example: 2023-01-01 00:00
+        menu:
+          $ref: '#/components/schemas/menu_summary_for_user'
+        menus:
+          type: array
+          items:
+            $ref: '#/components/schemas/menu_summary_for_my_user'
+      required:
+        - userId
+        - nickname
+        - imageUrl
+        - occupation
+        - occupations
+        - isFavorite
+        - reviewScore
+        - goodSkill
+        - areas
+        - shortestReservableDate
+        - menu
+        - menus
+
+    user_summary_for_favorite:
+      type: object
+      description: お気に入りユーザー一覧で使用するユーザー情報
+      properties:
+        userId:
+          type: integer
+        nickname:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        occupation:
+          $ref: '#/components/schemas/occupation_summary'
+        reviewScore:
+          type: float64
+        goodSkill:
+          type: string
+        menu:
+          $ref: '#/components/schemas/menu_summary_for_user'
+        salons:
+          type: array
+          items:
+            $ref: '#/components/schemas/salon_summary_for_user'
+      required:
+        - userId
+        - nickname
+        - imageUrl
+        - occupation
+        - reviewScore
+        - goodSkill
+        - menu
+        - salons
+
+    user_summary_for_reserved:
+      type: object
+      description: 予約済みユーザー一覧で使用するユーザー情報
+      properties:
+        userId:
+          type: integer
+        nickname:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        reservationId:
+          type: integer
+        reservationDateTime:
+          type: string
+          description: 予約日
+          example: 2023-01-01 00:00
+        occupations:
+          type: array
+          items:
+            $ref: '#/components/schemas/occupation_summary'
+        reviewScore:
+          type: float64
+        goodSkill:
+          type: string
+        isFavorite:
+          type: boolean
+          description: お気に入り登録
+          example: false
+        menu:
+          $ref: '#/components/schemas/menu_summary_for_user'
+        salons:
+          type: array
+          items:
+            $ref: '#/components/schemas/salon_summary_for_user'
+      required:
+        - userId
+        - nickname
+        - imageUrl
+        - reservationDateTime
+        - occupations
+        - reviewScore
+        - goodSkill
+        - isFavorite
+        - menu
+        - salons
+
+    user_summary_for_block:
+      type: object
+      description: ブロックしたユーザー一覧用ユーザー情報
+      properties:
+        userId:
+          type: integer
+        nickname:
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        occupations:
+          type: array
+          items:
+            $ref: '#/components/schemas/occupation_for_block'
+      required:
+        - userId
+        - nickname
+        - imageUrl
+        - occupations
+
+    favorite_introduction_user:
+      type: object
+      description: お気に入りユーザー情報（紹介リンクあり）
+      properties:
+        userId:
+          type: integer
+          description: ユーザーID
+          example: 1
+        nickname:
+          type: string
+          description: ニックネーム
+          example: まっちゃん
+        introductionLink:
+          type: string
+          description: 紹介リンク（Dynamic Links）
+          example: https://www.lispo.salon/e6Ir32
+
+    menu_summary_for_user:
+      type: object
+      description: メニュー情報
+      nullable: true
+      properties:
+        menuId:
+          type: integer
+        menuName:
+          type: string
+        menuPrice:
+          type: integer
+        imageUrl:
+          type: string
+          nullable: true
+      required:
+        - menuId
+        - menuName
+        - menuPrice
+        - imageUrl
+
+    menu_summary_for_my_user:
+      type: object
+      properties:
+        menuId:
+          type: integer
+          description: メニューID
+          example: 1
+        menuName:
+          type: string
+          description: メニュー名
+          example: カット
+        menuCategoryName:
+          type: string
+          description: メニューカテゴリ名
+          example: カット
+        explanation:
+          type: string
+          nullable: true
+          description: メニュー説明
+          example: カットの説明です
+        menuPrice:
+          type: integer
+          description: 料金
+          example: 3000
+        treatmentTime:
+          type: integer
+          description: 施術時間(分単位)
+          example: 30
+        imageUrl:
+          type: string
+          nullable: true
+      required:
+        - menuId
+        - menuName
+        - menuCategoryName
+        - explanation
+        - menuPrice
+        - treatmentTime
+        - tags
+        - imageUrl
+
+    occupation_summary:
+      type: object
+      properties:
+        occupationId:
+          type: integer
+        occupationName:
+          type: string
+        occupationYears:
+          type: integer
+      required:
+        - occupationId
+        - occupationName
+        - occupationYears
+
+    salon_summary_for_user:
+      type: object
+      properties:
+        salonId:
+          type: integer
+          nullable: true
+          description: 働いているサロン。自分で登録したサロンの場合はnullが入ります
+          example: 1
+        salonName:
+          type: string
+          description: 働いているサロン名
+          example: JAM 吉祥寺店
+      required:
+        - salonId
+        - salonName
+
+    occupation_for_block:
+      type: object
+      description: 職種情報
+      properties:
+        occupationId:
+          type: integer
+          description: 職種ID
+          example: 1
+        occupationName:
+          type: string
+          description: 職種名
+          example: 美容師
+      required:
+        - occupationId
+        - occupationName
+
+    menu_for_user_index:
+      type: object
+      description: メニュー情報(ユーザー一覧のメニュー一覧で使用)
+      properties:
+        menuId:
+          type: integer
+        menuName:
+          type: string
+        menuCategoryName:
+          type: string
+        explanation:
+          type: string
+          nullable: true
+        menuPrice:
+          type: integer
+        treatmentTime:
+          type: integer
+        imageUrl:
+          type: string
+          nullable: true
+      required:
+        - menuId
+        - menuName
+        - menuCategoryName
+        - explanation
+        - menuPrice
+        - treatmentTime
+        - imageUrl
+
+    area_for_user:
+      type: object
+      description: エリア情報
+      properties:
+        areaId:
+          type: integer
+          description: エリアID
+          example: 1
+        areaName:
+          type: string
+          description: エリア名
+          example: 青山・表参道・原宿
+      required:
+        - areaId
+        - areaName
+
+    user_earliest_available_shift:
+      type: object
+      nullable: true
+      properties:
+        date:
+          type: string
+          description: 日付
+          example: 2023-01-01
+        areaName:
+          type: string
+          description: エリア名
+          example: 渋谷
+        availableHour:
+          type: string
+          description: 予約可能時間
+          example: 10:00~12:00
+      required:
+        - date
+        - areaName
+        - availableHour
+
+    user_review_summary:
+      type: object
+      properties:
+        reviewScore:
+          type: float64
+          description: レビュースコア
+          example: 3.5
+        technicalAndFinishSatisfactionAverateScore:
+          type: float64
+          description: 技術・仕上がり満足度平均スコア
+          example: 3.5
+        reservationResponseSatisfactionAverateScore:
+          type: float64
+          description: 予約対応満足度平均スコア
+          example: 3.5
+        serviceSatisfactionAverateScore:
+          type: float64
+          description: 接客満足度平均スコア
+          example: 3.5
+      required:
+        - reviewScore
+        - technicalAndFinishSatisfactionAverateScore
+        - reservationResponseSatisfactionAverateScore
+        - serviceSatisfactionAverateScore
+
+    user_area:
+      type: object
+      description: エリア情報
+      properties:
+        areaId:
+          type: integer
+          description: エリアID
+          example: 1
+        areaName:
+          type: string
+          description: エリア名
+          example: 青山・表参道・原宿
+      required:
+        - areaId
+        - areaName
+
+    user_occupation:
+      type: object
+      properties:
+        occupationId:
+          type: integer
+          description: 職種ID
+          example: 1
+        occupationName:
+          type: string
+          description: 職種名
+          example: 美容師
+        years:
+          type: integer
+          description: 経験年数
+          example: 5
+      required:
+        - occupationId
+        - occupationName
+        - years
+
+    user_occupation_tag:
+      type: object
+      properties:
+        occupationTagId:
+          type: integer
+          description: 職種タグID
+          example: 1
+        occupationTagName:
+          type: string
+          description: 職種タグ名
+          example: カット
+      required:
+        - occupationTagId
+        - occupationTagName
+
+    user_common_tag:
+      type: object
+      properties:
+        commonTagId:
+          type: integer
+          description: 共通タグID
+          example: 1
+        commonTagName:
+          type: string
+          description: 共通タグ名
+          example: 10代にオススメ
+      required:
+        - commonTagId
+        - commonTagName
+    
+    user_occupation_menu:
+      type: object
+      properties:
+        occupationName:
+          type: string
+          description: 職種名
+          example: 美容師
+        occupationMenus:
+          type: array
+          items:
+            $ref: '#/components/schemas/user_menu'
+      required:
+        - occupationName
+        - occupationMenus
+
+    user_menu:
+      type: object
+      description: メニュー情報
+      nullable: true
+      properties:
+        menuId:
+          type: integer
+          description: メニューID
+          example: 1
+        menuName:
+          type: string
+          description: メニュー名
+          example: カット
+        menuCategoryId:
+          type: integer
+          description: メニューカテゴリID
+          example: 1
+        menuCategoryName:
+          type: string
+          description: メニューカテゴリ名
+          example: カット
+        explanation:
+          type: string
+          description: メニュー説明
+          nullable: true
+          example: カットに関するメニューです。
+        price:
+          type: integer
+          description: 値段
+          example: 1000
+        treatmentTime:
+          type: integer
+          description: 施術時間（分）
+          example: 60
+        imageUrl:
+          type: string
+          description: メニュー画像
+          nullable: true
+          example: https://bucket-lispo-dev-public.s3.ap-northeast-1.amazonaws.com/241/menu.png
+        menuOccupationTags:
+          type: array
+          description: メニューに紐づく職種タグリスト
+          items:
+            $ref: '#/components/schemas/user_menu_occupation_tag'
+      required:
+        - menuId
+        - menuName
+        - menuCategoryId
+        - menuCategoryName
+        - explanation
+        - price
+        - treatmentTime
+        - imageUrl
+        - menuOccupationTags
+
+    user_menu_occupation_tag:
+      type: object
+      properties:
+        occupationTagId:
+          type: integer
+          description: 職種タグID
+          example: 1
+        occupationTagName:
+          type: string
+          description: 職種タグ名
+          example: カット
+      required:
+        - occupationTagId
+        - occupationTagName
+
+    user_faq:
+      type: object
+      properties:
+        userFaqId:
+          type: integer
+          description: ユーザーFAQ ID
+          example: 1
+        question:
+          type: string
+          description: 質問
+          example: 複数メニューの予約は可能でしょうか？
+        answer:
+          type: string
+          description: 回答
+          example: 可能です。
+      required:
+        - userFaqId
+        - question
+        - answer
+
+    user_working_share_salon:
+      type: object
+      properties:
+        userWorkingShareSalonId:
+          type: integer
+          description: 働いている店舗ID
+          example: 1
+        name:
+          type: string
+          description: 店舗名
+          example: サロン田中
+        zipCd:
+          type: string
+          description: 郵便番号
+          example: 1130033
+        prefectureId:
+          type: integer
+          description: 都道府県ID
+          example: 13
+        city:
+          type: string
+          description: 市区町村
+          example: 文京区
+        address:
+          type: string
+          description: 以降の住所
+          example: 本郷1-1-1
+        latitude:
+          type: float64
+          description: 緯度
+          example: 35.67016255935929000
+        longitude:
+          type: float64
+          description: 軽度
+          example: 139.70533897987363000
+        nearestStation:
+          type: string
+          description: 最寄り駅
+          nullable: true
+          example: 丸ノ内線 本郷3丁目駅 徒歩10分
+        images:
+          type: array
+          description: 画像リスト
+          items:
+            type: string
+            example: https://bucket-lispo-dev-public.s3.ap-northeast-1.amazonaws.com/241/image1.png
+      required:
+        - userWorkingShareSalonId
+        - name
+        - zipCd
+        - prefectureId
+        - city
+        - address
+        - latitude
+        - longitude
+        - nearestStation
+        - images

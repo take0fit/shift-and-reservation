@@ -1,0 +1,6 @@
+in: path
+name: inquiryCategoryId 
+description: 問い合わせカテゴリID
+schema:
+  type: integer
+required: true

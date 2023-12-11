@@ -1,0 +1,76 @@
+openapi: 3.0
+info:
+  title: me.yaml
+  version: '1.0'
+  description: 会員情報
+components:
+  schemas:
+    response_me:
+      type: object
+      properties:
+        nickname:
+          type: string
+          description: ニックネーム
+          example: シュガー
+        lastName:
+          type: string
+          description: 氏名（姓）
+          example: 佐藤
+        firstName:
+          type: string
+          description: 氏名（名）
+          example: 小次郎
+        lastNameRuby:
+          type: string
+          description: カナ（姓）
+          example: サトウ
+        firstNameRuby:
+          type: string
+          description: カナ（名）
+          example: コジロウ
+        sex:
+          type: integer
+          description: 性別（0:男 1:女 2:その他）
+          example: 1
+        birthday:
+          type: string
+          description: 生年月日 
+          example: 1900-01-01
+        zipCd:
+          type: string
+          description: 郵便番号
+          example: 192-0012
+        prefectureId:
+          type: integer
+          description: 都道府県ID 
+          example: 13
+        city:
+          type: string
+          description: 市区町村 
+          example: 八王子市
+        phone:
+          type: string
+          description: 携帯電話 
+          example: '08091915555'
+        email:
+          type: string
+          description: メールアドレス
+          example: me@lispo.com
+        selfIntroduction:
+          type: string
+          description: 自己紹介
+          example: よろしくお願いします。
+
+      required:
+        - nickname
+        - lastName
+        - firstName
+        - lastNameRuby
+        - firstNameRuby
+        - sex
+        - birthday
+        - zipCd
+        - prefectureId
+        - city
+        - phone
+        - email

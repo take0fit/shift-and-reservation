@@ -1,0 +1,77 @@
+openapi: 3.0
+info:
+  title: me.yaml
+  version: '1.0'
+  description: 会員情報
+components:
+  schemas:
+    request_update_me:
+      type: object
+      properties:
+        nickname:
+          type: string
+          description: ニックネーム
+          example: やーまだ
+        lastName:
+          type: string
+          description: 氏名（姓）
+          example: 山田
+        firstName:
+          type: string
+          description: 氏名（名）
+          example: 次郎
+        lastNameRuby:
+          type: string
+          description: カナ（姓）
+          example: ヤマダ
+        firstNameRuby:
+          type: string
+          description: カナ（名）
+          example: ジロウ
+        sex:
+          type: integer
+          description: 性別（0:男 1:女 2:その他）
+          example: 1
+        birthday:
+          type: string
+          description: 生年月日 
+          example: 2000-01-21
+        zipCd:
+          type: string
+          description: 郵便番号
+          example: 273-0012
+        prefectureId:
+          type: integer
+          description: 都道府県ID 
+          example: 14
+        city:
+          type: string
+          description: 市区町村 
+          example: 船橋市
+        phone:
+          type: string
+          description: 携帯電話 
+          example: '08019283847'
+      required:
+        - nickname
+        - lastName
+        - firstName
+        - lastNameRuby
+        - firstNameRuby
+        - sex
+        - birthday
+        - zipCd
+        - prefectureId
+        - city
+        - phone
+
+    request_update_me_profile_image:
+      type: object
+      properties:
+        profileImage:
+          type: string
+          format: binary
+          description: プロフィール画像
+          example: image_1.png
+      required:
+        - profileImage 

@@ -1,0 +1,6 @@
+name: perPage
+in: query
+schema:
+  type: integer
+description: 1ページあたりのデータ数
+required: false
